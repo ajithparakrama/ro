@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Point;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PointController extends Controller
 {
@@ -24,7 +26,7 @@ class PointController extends Controller
      */
     public function create()
     {
-        //
+        return view('points.create');
     }
 
     /**
@@ -34,8 +36,33 @@ class PointController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    { 
+        $request->validate(
+            ['event'=>'required|min:2|max:255',
+            'event_date'=>'required|date',
+            'file'=>'required|mimes:jpg,jpeg,JPG,JPEG|max:2048']
+        );
+
+        
+        $event = point::create([
+            'event'=>$request->event,
+            'event_date'=>$request->event_date,
+            'user_id'=>Auth::user()->id
+        ]);
+
+        if($request->file('file')){
+            $destinationPath = public_path('uploads/'.$event->id.'/');    
+            if(!File::isDirectory($destinationPath)){
+              File::makeDirectory($destinationPath, 0777, true, true);    
+              }
+              $fileModel = new File;
+                $ext =  $request->file('file')->extension();
+                $fileName = time().'.'.$ext;
+                $request->file('file')->move($destinationPath,$fileName); 
+              $event->update(['file'=>'uploads/'.$event->id.'/'.$fileName]);
+              return redirect()->route('points.index',$event->id)->with('message','Success'); 
+        }    
+
     }
 
     /**

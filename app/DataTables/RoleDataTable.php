@@ -28,8 +28,9 @@ class RoleDataTable extends DataTable
             ->addColumn('action', function($item){
                 $user = Auth()->user(); 
                 $btn = '<a class="btn btn-xs btn-info" href="'.route('roles.show',$item->id).'">Show</a>';
-                if($user->can('role-edit')){
-                $btn .= '<a class="btn btn-xs btn-primary" href="'.route('roles.edit',$item->id).'">Edit</a>';   }        
+               if($user->can('role-edit')){
+                $btn .= '<a class="btn btn-xs btn-primary" href="'.route('roles.edit',$item->id).'">Edit</a>';   
+            }        
                 if($user->can('role-delete')){ 
                     $btn .=    '<form  action="'. route('roles.destroy',$item->id).'" method="POST" class="d-inline" >
                     '.csrf_field().' '.method_field("DELETE").' <button type="submit"  class="btn btn-xs btn-danger" 

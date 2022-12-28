@@ -20,7 +20,7 @@ class CreatePointsTable extends Migration
             $table->string('event', 250)->nullable();
             $table->double('point', 10, 2)->nullable();
             $table->string('file', 250);
-            $table->date('event_date');
+            $table->date('event_date')->default(NULL)->nullable();
             $table->tinyInteger('status');
             $table->unsignedBigInteger('checked_by')->nullable();
            $table->date('checked_date');

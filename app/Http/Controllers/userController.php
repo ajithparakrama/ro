@@ -54,6 +54,11 @@ class userController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'nic'=> 'required',
+            'user_name'=> 'required|unique:users,user_name',
+            'phone'=> 'required', 
+            'date_of_birth'=> 'required|date',
+            'address' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
@@ -90,7 +95,7 @@ class userController extends Controller
      */
     public function edit(User $user)
     {
-        
+
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
         return view('users.edit',compact('user','roles','userRole'));
@@ -107,10 +112,14 @@ class userController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'nic'=> 'required', 
+            'phone'=> 'required', 
+            'date_of_birth'=> 'required|date',
+            'address' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id, 
             'roles' => 'required'
         ]);
-
+ 
     
         $input = $request->all();
  

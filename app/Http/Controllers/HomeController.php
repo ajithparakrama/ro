@@ -25,9 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $category =  machine_category::where('status',1)->count();
-       $machinery = machinery::where('status',1)->count();
-       $machine_name = machine_name::count();
+       $category =  1;// machine_category::where('status',1)->count();
+       $machinery = 1;// machinery::where('status',1)->count();
+       $machine_name = 1;// machine_name::count();
         return view('home',compact('category','machinery','machine_name'));
     }
 
