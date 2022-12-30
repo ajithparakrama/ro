@@ -28,6 +28,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
  
+Route::get('/points/all', [App\Http\Controllers\PointController::class, 'all'])->name('points.all');
+Route::get('/points/old', [App\Http\Controllers\PointController::class, 'old'])->name('points.old');
 Route::resource('points', PointController::class);
 Route::resource('users', userController::class);
 

@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Points : {{ $totalPoints }}</h1>
+            <h1>Requests for Approve</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -28,6 +28,7 @@
             <thead>
               <tr>
                 <th>No</th>
+                <th>Member</th>
                 <th>Event</th>
                 <th>Date</th>
                 <th>Status</th>
@@ -39,6 +40,7 @@
               @foreach($points as $item)
               <tr>
                 <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->user->name }}</td>
                 <td>{{ $item->event }}</td>
                 <td>{{ $item->event_date }}</td>
                 <td>

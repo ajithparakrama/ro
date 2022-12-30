@@ -16,7 +16,27 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        $points = Auth::user()->points()->paginate(20);
+        $totalPoints = Auth::user()->points()->pluck('point')->sum();
+        return view('points.index',compact('points','totalPoints'));
+
+    }
+
+
+    public function all()
+    {
+        $points = point::where('status','=','10')->paginate(20); 
+        return view('points.all',compact('points'));
+
+    }
+
+
+    public function old()
+    { 
+        
+        $points = point::where('status','!=','10')->paginate(20);
+        return view('points.old',compact('points'));
+
     }
 
     /**
@@ -73,7 +93,7 @@ class PointController extends Controller
      */
     public function show(Point $point)
     {
-        //
+        return view('points.show',compact('point'));
     }
 
     /**
@@ -96,7 +116,17 @@ class PointController extends Controller
      */
     public function update(Request $request, Point $point)
     {
-        //
+        $request->validate(
+            ['point'=>'required',
+            'status'=>'required']
+        );
+
+        $point->update([
+            'point'=>$request->point,
+            'status'=>$request->status
+        ]);
+
+        return redirect()->route('points.all')->with('message','Success'); 
     }
 
     /**

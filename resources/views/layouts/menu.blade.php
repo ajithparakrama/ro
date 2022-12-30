@@ -5,34 +5,45 @@
         <p>Home</p>
     </a>
 </li>
+@can('point-list')
+<li class="nav-item">
+    <a href="{{ route('points.index') }}" class="nav-link {{  request()->routeIs('points.index') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>My Points</p>
+    </a>
+</li>
+@endcan
+@can('point-create')
 <li class="nav-item">
     <a href="{{ route('points.create') }}" class="nav-link {{  request()->routeIs('points.create') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Upload</p>
     </a>
 </li>
-
+@endcan
+@can('user-list')
 <li class="nav-item">
   <a href="{{ route('users.index') }}" class="nav-link {{  request()->routeIs('users*') ? 'active' : '' }}">
       <i class="nav-icon fas fa-cash-register"></i> 
       <p>Members</p>
   </a>
 </li>
-
-<li class="nav-item has-treeview {{  request()->is('settings*') ? 'menu-open' : ''   }} ">
-    <a href="#" class="nav-link  {{  request()->is('settings*') ? 'active' : ''     }}">
+@endcan
+@can('point-all-old')
+<li class="nav-item has-treeview {{  request()->is('points*') ? 'menu-open' : ''   }} ">
+    <a href="#" class="nav-link  {{  request()->is('points*') ? 'active' : ''     }}">
         <i class="nav-icon fas fa-cog"></i>
         <p>Member Requests</p>
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="#" class="nav-link {{ request()->routeIs('locations*') ? 'active' : '' }}">
+          <a href="{{ route('points.all') }}" class="nav-link {{ request()->routeIs('points.all') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>New Requests</p>
           </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link {{ request()->routeIs('categories*') ? 'active' : '' }}">
+            <a href="{{ route('points.old') }}" class="nav-link {{ request()->routeIs('points.old') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
               <p>Past Requests</p>
             </a>
@@ -40,6 +51,8 @@
            
     </ul>
 </li>
+@endcan
+@can('role-list')
 {{-- @can('user-list') --}}
 <li class="nav-item has-treeview {{  request()->is('mainatin*') ? 'menu-open' : ''   }} ">
   <a href="#" class="nav-link  {{  request()->is('mainatin*') ? 'active' : ''     }}">
@@ -54,6 +67,7 @@
       </a>
     </li>
   </ul>
+  @endcan 
   {{-- @endcan --}}
   <li class="nav-item">
     <a href="{{ route('profile') }}" class="nav-link {{  request()->routeIs('profile') ? 'active' : '' }}">
@@ -61,4 +75,5 @@
         <p>Profile</p>
     </a>
 </li>
+
  
