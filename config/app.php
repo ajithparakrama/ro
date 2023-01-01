@@ -162,7 +162,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        // Other service providers...
+    
+    Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -234,6 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 

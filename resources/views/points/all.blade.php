@@ -24,7 +24,8 @@
           <h3 class="card-title">All</h3> 
         </div>
         <div class="card-body"> 
-          <table class="table table-responsive table-bordered w-100">
+          {{ $dataTable->table(); }}
+          {{-- <table class="table table-responsive table-bordered w-100">
             <thead>
               <tr>
                 <th>No</th>
@@ -63,10 +64,9 @@
               </tr>
               @endforeach
             </tbody>
-          </table>
+          </table> --}}
         </div>  
-        <div class="card-footer">
-          {{ $points->links("pagination::bootstrap-4") }}
+        <div class="card-footer"> 
         </div>
       </div> 
 
@@ -75,11 +75,20 @@
 @endsection
 
 @section('third_party_stylesheets') 
- 
+   <link rel="stylesheet" href="{{ asset('plugin/datatable/buttons.dataTables.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('plugin/datatable/dataTables.bootstrap4.min.css') }}">
 @stop
 
 @section('third_party_scripts') 
- 
+<script src="{{ asset('plugin/jquery/jquery.js') }}"  ></script>
+<script src="{{ asset('plugin/datatable/jquery.validate.js') }}" defer></script>
+<script src="{{ asset('plugin/datatable/jquery.dataTables.min.js') }}" defer></script>
+<script src="{{ asset('plugin/datatable/bootstrap.min.js') }}" defer></script>
+<script src="{{ asset('plugin/datatable/dataTables.bootstrap4.min.js') }}" defer></script> 
+<script src="{{ asset('plugin/datatable/dataTables.buttons.min.js') }}" defer></script> 
+<script src="{{ asset('plugin/vendor/datatables/buttons.server-side.js') }}" defer></script> 
+
+{!! $dataTable->scripts() !!} 
 @stop
 
 

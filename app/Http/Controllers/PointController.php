@@ -6,6 +6,8 @@ use App\Models\Point;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\DataTables\allPointsDataTable;
+use App\DataTables\newPointsDataTable;
 
 class PointController extends Controller
 {
@@ -23,19 +25,20 @@ class PointController extends Controller
     }
 
 
-    public function all()
+    public function all(newPointsDataTable $dataTable)
     {
-        $points = point::where('status','=','10')->paginate(20); 
-        return view('points.all',compact('points'));
+      //  $points = point::where('status','=','10')->paginate(20); 
+     //   return view('points.all',compact('points'));
+  return    $dataTable->render('points.old'); 
 
     }
 
 
-    public function old()
+    public function old(allPointsDataTable $dataTable)
     { 
-        
-        $points = point::where('status','!=','10')->paginate(20);
-        return view('points.old',compact('points'));
+        return    $dataTable->render('points.all'); 
+        // $points = point::where('status','!=','10')->paginate(20);
+        // return view('points.old',compact('points'));
 
     }
 
