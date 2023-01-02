@@ -8,7 +8,7 @@
 @can('point-list')
 <li class="nav-item">
     <a href="{{ route('points.index') }}" class="nav-link {{  request()->routeIs('points.index') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
+        <i class="nav-icon fas fa-chart-pie"></i>
         <p>My Points</p>
     </a>
 </li>
@@ -16,23 +16,39 @@
 @can('point-create')
 <li class="nav-item">
     <a href="{{ route('points.create') }}" class="nav-link {{  request()->routeIs('points.create') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
+        <i class="nav-icon fas  fa-upload"></i>
         <p>Upload</p>
     </a>
 </li>
 @endcan
 @can('user-list')
-<li class="nav-item">
-  <a href="{{ route('users.index') }}" class="nav-link {{  request()->routeIs('users*') ? 'active' : '' }}">
-      <i class="nav-icon fas fa-cash-register"></i> 
-      <p>Members</p>
+
+<li class="nav-item has-treeview {{  request()->is('users*') ? 'menu-open' : ''   }} ">
+  <a href="#" class="nav-link  {{   request()->is('users*') ? 'active' : ''     }}">
+      <i class="nav-icon fas fa-users"></i>
+      <p>Member Requests</p>
   </a>
+  <ul class="nav nav-treeview">
+      <li class="nav-item">
+        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Members</p>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a href="{{ route('users.suspendusers') }}" class="nav-link {{ request()->routeIs('users.suspendusers') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Susspend Members</p>
+          </a>
+        </li>
+         
+  </ul>
 </li>
 @endcan
 @can('point-all-old')
-<li class="nav-item has-treeview {{  request()->is('points*') ? 'menu-open' : ''   }} ">
-    <a href="#" class="nav-link  {{  request()->is('points*') ? 'active' : ''     }}">
-        <i class="nav-icon fas fa-cog"></i>
+<li class="nav-item has-treeview {{  (request()->is('points*')&& !request()->routeIs('points.index')) ? 'menu-open' : ''   }} ">
+    <a href="#" class="nav-link  {{   (request()->is('points*')&& !request()->routeIs('points.index')) ? 'active' : ''     }}">
+        <i class="nav-icon fas fa-reply-all"></i>
         <p>Member Requests</p>
     </a>
     <ul class="nav nav-treeview">
@@ -56,7 +72,7 @@
 {{-- @can('user-list') --}}
 <li class="nav-item has-treeview {{  request()->is('mainatin*') ? 'menu-open' : ''   }} ">
   <a href="#" class="nav-link  {{  request()->is('mainatin*') ? 'active' : ''     }}">
-      <i class="nav-icon fas fa-users"></i>
+      <i class="nav-icon fas fa-user-cog"></i>
       <p>Administration</p>
   </a>
   <ul class="nav nav-treeview">

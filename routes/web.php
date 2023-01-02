@@ -31,6 +31,13 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/points/all', [App\Http\Controllers\PointController::class, 'all'])->name('points.all');
 Route::get('/points/old', [App\Http\Controllers\PointController::class, 'old'])->name('points.old');
 Route::resource('points', PointController::class);
+
+
+Route::get('/users/suspend/{id}',[userController::class,'suspend'])->name('users.suspend'); 
+Route::get('/users/suspendusers/',[userController::class,'suspendusers'])->name('users.suspendusers'); 
+Route::get('/users/activate/{id}',[userController::class,'activate'])->name('users.activate'); 
+Route::get('/users/resetpass/{id}',[userController::class,'resetpass'])->name('users.resetpass'); 
+
 Route::resource('users', userController::class);
 
 

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\DataTables\userDatatable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Arr;
+use App\DataTables\SusUsersDatatable;
 
 class userController extends Controller
 {
@@ -30,6 +31,11 @@ class userController extends Controller
     public function index(userDatatable $dataTable)
     {
         return $dataTable->render('users.index');
+    }
+
+    public function suspendusers(SusUsersDatatable $datatable)
+    { 
+        return $datatable->render('users.suspendusers');
     }
 
     /**
@@ -155,8 +161,23 @@ class userController extends Controller
     public function destroy(User $user)
     {
         
-        $user->delete();
+        $user->update(['active'=>0]);
         return redirect()->route('users.index')
                 ->with('success','User deleted successfully');
+    }
+
+    public function suspend($user){
+        User::where('id',$user)->update(['active'=>'0']); 
+         return redirect()->route('users.index')->with( 'message',' account suspended');
+    }
+
+    public function activate($user){
+        User::where('id',$user)->update(['active'=>'1']); 
+        return redirect()->route('users.index')->with( 'message',' account activated');
+    }
+ 
+    public function resetpass($user){
+        User::where('id',$user)->update(['password' => Hash::make('abc@123')]); 
+        return redirect()->route('users.index')->with( 'message', ' Password Reset as abc@123');
     }
 }

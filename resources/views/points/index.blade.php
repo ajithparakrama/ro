@@ -24,15 +24,15 @@
           <h3 class="card-title">All</h3> 
         </div>
         <div class="card-body"> 
-          <table class="table table-responsive table-bordered w-100">
+          <table class="table table-bordered" style="width: 100%" >
             <thead>
               <tr>
-                <th>No</th>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Points</th>
-                <th>Action</th>
+                <th  style="width: 10%">No</th>
+                <th  style="width: 20%" >Event</th>
+                <th  style="width: 20%" >Date</th>
+                <th  style="width: 20%" >Status</th>
+                <th  style="width: 20%" >Points</th>
+                <th  style="width: 10%" >Action</th>
               </tr>
             </thead>
             <tbody> 
